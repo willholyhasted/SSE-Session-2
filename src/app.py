@@ -1,6 +1,5 @@
-
-
 from flask import Flask, render_template, request
+
 app = Flask(__name__)
 
 
@@ -9,7 +8,7 @@ def hello_world():
     return render_template("index.html")
 
 
-@app.route('/<name>')
+@app.route("/<name>")
 def print_name(name):
     return f"Hello, {name}"
 
