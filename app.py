@@ -1,4 +1,5 @@
 import re
+from zipfile import stringEndArchive64Locator
 
 from flask import Flask, render_template, request
 
@@ -43,5 +44,13 @@ def process_query(string):
         numbers = [int(num) for num in numbers]
         biggest = str(max(numbers))
         return biggest
+    elif "multiplied" in string:
+        numbers = re.findall(r"\d+", string)
+        numbers = [int(num) for num in numbers]
+        value = 1
+        for num in numbers:
+            value *= num
+            value = str(value)
+            return value
     else:
         return "Query not found"
