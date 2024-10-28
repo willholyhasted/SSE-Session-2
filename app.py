@@ -52,7 +52,8 @@ def process_query(string):
             value = value * num
         value = str(value)
         return value
-    elif "Which of the following numbers is both a square and a cube:" in string:
+    elif ("Which of the following numbers is"
+          " both a square and a cube:") in string:
         numbers = re.findall(r"\d+", string)
         numbers = [int(num) for num in numbers]
         correct = []
