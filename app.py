@@ -48,7 +48,7 @@ def process_query(string):
         numbers = [int(num) for num in numbers]
         value = 1
         for num in numbers:
-            value *= num
+            value = value * num
             value = str(value)
             return value
     else:
