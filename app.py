@@ -1,5 +1,4 @@
 import re
-from zipfile import stringEndArchive64Locator
 
 from flask import Flask, render_template, request
 
