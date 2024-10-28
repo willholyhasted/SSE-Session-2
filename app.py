@@ -60,7 +60,7 @@ def process_query(string):
             if round(num**(1/2))**2 == num:
                 if round(num**(1/3))**3 == num:
                     correct.append(num)
-        return ' '.join(str(e) for e in correct)
+        return ', '.join(str(e) for e in correct)
 
     else:
         return "Query not found"
