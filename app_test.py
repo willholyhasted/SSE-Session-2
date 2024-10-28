@@ -14,3 +14,7 @@ def test_does_not_know_about_asteroids():
 
 def test_27_plus_49():
     assert process_query("What is 27 plus 49?") == "76"
+
+
+def test_largest_72_40_50():
+    assert process_query("Which of the following numbers is the largest: 72, 40, 50?") == "72"

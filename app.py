@@ -38,5 +38,10 @@ def process_query(string):
         numbers = [int(num) for num in numbers]
         result = str(sum(numbers))
         return result
+    elif "Which of the following numbers is the largest:" in string:
+        numbers = re.findall(r"\d+", string)
+        numbers = [int(num) for num in numbers]
+        biggest = str(max(numbers))
+        return biggest
     else:
         return "Query not found"
