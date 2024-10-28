@@ -10,3 +10,7 @@ def test_knows_about_dinosaurs():
 
 def test_does_not_know_about_asteroids():
     assert process_query("asteroids") == "Unknown"
+
+
+def test_27_plus_49():
+    assert process_query("What is 27 plus 49?") == "76"

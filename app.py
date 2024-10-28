@@ -1,3 +1,5 @@
+import re
+
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -31,5 +33,10 @@ def process_query(string):
         return "Dinosaurs ruled the Earth 200 million years ago"
     elif string == "asteroids":
         return "Unknown"
+    elif "plus" in string:
+        numbers = re.findall(r"\d+", string)
+        numbers = [int(num) for num in numbers]
+        result = str(sum(numbers))
+        return result
     else:
         return "Query not found"
