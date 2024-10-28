@@ -33,3 +33,6 @@ def test_sqrt_cbrt_2074_2809_64_8_1062_3894_3288():
 
 def test_2_to_power_3():
     assert process_query("What is 2 to the power of 3?") == "8"
+
+def test_3_minus_2():
+    assert process_query("What is 3 minus 2?") == "1"

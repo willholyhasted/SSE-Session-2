@@ -66,5 +66,9 @@ def process_query(string):
         numbers = [int(num) for num in numbers]
         answer = str(numbers[0]**numbers[1])
         return answer
+    elif "minus" in string:
+        numbers = re.findall(r"\d+", string)
+        numbers = [int(num) for num in numbers]
+        answer = str(numbers[0]-numbers[1])
     else:
         return "Query not found"
