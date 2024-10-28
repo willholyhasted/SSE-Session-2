@@ -61,6 +61,10 @@ def process_query(string):
                 if round(num**(1/3))**3 == num:
                     correct.append(num)
         return ', '.join(str(e) for e in correct)
-
+    elif "power" in string:
+        numbers = re.findall(r"\d+", string)
+        numbers = [int(num) for num in numbers]
+        answer = str(numbers[0]**numbers[1])
+        return answer
     else:
         return "Query not found"
