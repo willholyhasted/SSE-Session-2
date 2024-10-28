@@ -1,4 +1,5 @@
 import re
+import math
 
 from flask import Flask, render_template, request
 
@@ -51,5 +52,14 @@ def process_query(string):
             value = value * num
         value = str(value)
         return value
+    elif "Which of the following numbers is both a square and a cube:" in string:
+        numbers = re.findall(r"\d+", string)
+        numbers = [int(num) for num in numbers]
+        correct = []
+        for num in numbers:
+            if math.sqrt(num) % 1 == 0 and math.cbrt(num) % 1 == 0:
+                correct.append(num)
+        return ' '.join(str(e) for e in correct)
+
     else:
         return "Query not found"

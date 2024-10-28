@@ -23,3 +23,9 @@ def test_largest_72_40_50():
 
 def test_37_multiply_43():
     assert process_query("What is 37 multiplied by 43?") == "1591"
+
+
+def test_sqrt_cbrt_2074_2809_64_8_1062_3894_3288():
+    assert process_query("Which of the following numbers is both"
+                         " a square and a cube: 2074, 2809, 64, 8, 1062, "
+                         "3894, 3288?") == "64"
