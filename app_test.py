@@ -30,5 +30,6 @@ def test_sqrt_cbrt_2074_2809_64_8_1062_3894_3288():
                          " a square and a cube: 2074, 2809, 64, 8, 1062, "
                          "3894, 3288?") == "64"
 
+
 def test_2_to_power_3():
     assert process_query("What is 2 to the power of 3?") == "8"
