@@ -58,7 +58,7 @@ def process_query(string):
         numbers = [int(num) for num in numbers]
         correct = []
         for num in numbers:
-            if math.sqrt(num) % 1 == 0 and math.cbrt(num) % 1 == 0:
+            if math.sqrt(num) % 1 == 0 and (num**(1/3)) % 1 == 0:
                 correct.append(num)
         return ' '.join(str(e) for e in correct)
 
