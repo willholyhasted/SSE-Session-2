@@ -49,7 +49,7 @@ def process_query(string):
         value = 1
         for num in numbers:
             value = value * num
-            value = str(value)
-            return value
+        value = str(value)
+        return value
     else:
         return "Query not found"
