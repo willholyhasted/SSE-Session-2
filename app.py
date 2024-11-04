@@ -6,10 +6,10 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
-def make_request (username):
+def make_request(username):
     response = requests.get(f"https://api.github.com/users/{username}/repos")
     if response.status_code == 200:
-        repos = response.json()  # data returned is a list of ‘repository’ entities
+        repos = response.json()
         return repos
 
 
