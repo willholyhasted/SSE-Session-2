@@ -16,7 +16,7 @@ def make_request(username):
 """ Checking if the API works
 response = requests.get(f"https://api.github.com/users/willholyhasted/repos")
 if response.status_code == 200:
-        repos = response.json() 
+        repos = response.json()
         # data returned is a list of ‘repository’ entities
         for repo in repos:
             print(repo["full_name"])
