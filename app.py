@@ -9,11 +9,14 @@ app = Flask(__name__)
 def make_request(username):
     response = requests.get(f"https://api.github.com/users/{username}/repos")
     repos_list = []
+    repos_dates = []
     if response.status_code == 200:
         repos = response.json()
         for repo in repos:
             repos_list.append(repo["full_name"])
-        return repos_list
+            repos_dates.append(repo["updated_at"])
+
+        return repos_list, repos_dates
 
 
 """ response =
@@ -42,9 +45,10 @@ def github_page():
 @app.route("/github/submit", methods=["POST"])
 def github_submit():
     input_name = request.form.get("username")
-    repositories = make_request(input_name)
+    repositories, dates = make_request(input_name)
+    repo_data = zip(repositories, dates)  # Combine names and dates into pairs
     return render_template("github_hello.html",
-                           username=input_name, repositories=repositories)
+                           username=input_name, repo_data=repo_data)
 
 
 @app.route("/<name>")

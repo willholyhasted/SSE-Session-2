@@ -1,12 +1,25 @@
 <body>
     <h1>Hello {{ username }}!</h1>
     <h2>Your Repositories:</h2>
-    <ul>
-        {% for repo in repositories %}
-            <li>{{ repo }}</li>
-        {% endfor %}
-        {% if not repositories %}
-            <li>No repositories found.</li>
-        {% endif %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Repository Name</th>
+                <th>Updated At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for repo, updated_at in repo_data %}
+                <tr>
+                    <td>{{ repo }}</td>
+                    <td>{{ updated_at }}</td>
+                </tr>
+            {% endfor %}
+            {% if not repo_data %}
+                <tr>
+                    <td colspan="2">No repositories found.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
 </body>
