@@ -20,7 +20,7 @@ def make_request(username):
             repos_dates.append(repo["updated_at"])
 
             # Get the latest commit information
-            commits_url = repo["commits_url"].replace('{/sha}', '')  # Remove the placeholder
+            commits_url = repo["commits_url"].replace('{/sha}', '')
             commits_response = requests.get(commits_url)
 
             if commits_response.status_code == 200:
@@ -35,12 +35,12 @@ def make_request(username):
                         "message": latest_commit["commit"]["message"]
                     })
                 else:
-                    last_commits.append({"sha": None, "message": None})  # No commits found
+                    last_commits.append({"sha": None, "message": None})
             else:
-                last_commits.append({"sha": None, "message": None})  # Handle commit fetch error
+                last_commits.append({"sha": None, "message": None})
                 pushes_count.append(0)  # No pushes if commit fetch fails
 
-        return repos_list, repos_dates, last_commits, pushes_count  # Return repos, dates, last commits, and pushes count
+        return repos_list, repos_dates, last_commits, pushes_count
     else:
         return None, None, None, None  # Handle error case
 
@@ -59,7 +59,7 @@ def github_page():
 def github_submit():
     input_name = request.form.get("username")
     repositories, dates, last_commits, pushes_count = make_request(input_name)
-    repo_data = zip(repositories, dates, last_commits, pushes_count)  # Combine names and dates into pairs
+    repo_data = zip(repositories, dates, last_commits, pushes_count)
     return render_template("github_hello.html",
                            username=input_name, repo_data=repo_data)
 
