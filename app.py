@@ -16,11 +16,11 @@ def make_request(username):
         return repos_list
 
 
-""" response = 
+""" response =
 requests.get(f"https://api.github.com/users/willholyhasted/repos")
 if response.status_code == 200:
         repos = response.json()
-        print( repos[0])    
+        print( repos[0])
         # data returned is a list of ‘repository’ entities
        # for repo in repos:
        #     print(repo["full_name"])
