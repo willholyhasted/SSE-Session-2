@@ -8,18 +8,22 @@ app = Flask(__name__)
 
 def make_request(username):
     response = requests.get(f"https://api.github.com/users/{username}/repos")
+    repos_list = []
     if response.status_code == 200:
         repos = response.json()
-        return repos
+        for repo in repos:
+            repos_list.append(repo["full_name"])
+        return repos_list
 
 
-""" Checking if the API works
-response = requests.get(f"https://api.github.com/users/willholyhasted/repos")
+#Checking if the API works
+""" response = requests.get(f"https://api.github.com/users/willholyhasted/repos")
 if response.status_code == 200:
         repos = response.json()
+        print( repos[0])        
         # data returned is a list of ‘repository’ entities
-        for repo in repos:
-            print(repo["full_name"])
+       # for repo in repos:
+       #     print(repo["full_name"])
 else:
     print(f"Error: {response.status_code}")
 """
