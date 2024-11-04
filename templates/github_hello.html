@@ -1,3 +1,12 @@
 <body>
-<h1>Hello {{ username }}!</h1>
+    <h1>Hello {{ username }}!</h1>
+    <h2>Your Repositories:</h2>
+    <ul>
+        {% for repo in repositories %}
+            <li>{{ repo }}</li>
+        {% endfor %}
+        {% if not repositories %}
+            <li>No repositories found.</li>
+        {% endif %}
+    </ul>
 </body>

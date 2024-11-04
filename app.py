@@ -1,9 +1,27 @@
 import re
+import requests
 
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+def make_request (username):
+    response = requests.get(f"https://api.github.com/users/{username}/repos")
+    if response.status_code == 200:
+        repos = response.json() # data returned is a list of ‘repository’ entities
+        return repos
+
+
+
+""" Checking if the API works
+response = requests.get(f"https://api.github.com/users/willholyhasted/repos")
+if response.status_code == 200:
+        repos = response.json() # data returned is a list of ‘repository’ entities
+        for repo in repos:
+            print(repo["full_name"])
+else:
+    print(f"Error: {response.status_code}")
+"""
 
 @app.route("/")
 def hello_world():
@@ -18,7 +36,8 @@ def github_page():
 @app.route("/github/submit", methods=["POST"])
 def github_submit():
     input_name = request.form.get("username")
-    return render_template("github_hello.html", username=input_name)
+    repositories = make_request(input_name)
+    return render_template("github_hello.html", username=input_name, repositories=repositories)
 
 
 @app.route("/<name>")
