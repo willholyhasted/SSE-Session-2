@@ -18,7 +18,7 @@ def github_page():
 @app.route("/github/submit", methods=["POST"])
 def github_submit():
     input_name = request.form.get("username")
-    return render_template("github_hello.html", name=input_name)
+    return render_template("github_hello.html", username=input_name)
 
 
 @app.route("/<name>")
