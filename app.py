@@ -6,7 +6,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
-def make_request(username):
+"""def make_request(username):
     response = requests.get(f"https://api.github.com/users/{username}/repos")
     repos_list = []
     if response.status_code == 200:
@@ -14,7 +14,7 @@ def make_request(username):
         for repo in repos:
             repos_list.append(repo["full_name"])
         return repos_list
-
+"""
 
 """ response =
 requests.get(f"https://api.github.com/users/willholyhasted/repos")
@@ -42,9 +42,9 @@ def github_page():
 @app.route("/github/submit", methods=["POST"])
 def github_submit():
     input_name = request.form.get("username")
-    repositories = make_request(input_name)
+    #repositories = make_request(input_name)
     return render_template("github_hello.html",
-                           username=input_name, repositories=repositories)
+                           username=input_name) #repositories=repositories)
 
 
 @app.route("/<name>")
