@@ -10,26 +10,39 @@ def make_request(username):
     response = requests.get(f"https://api.github.com/users/{username}/repos")
     repos_list = []
     repos_dates = []
+    last_commits = []
+    pushes_count = []  # To hold the number of pushes (commits) for each repo
+
     if response.status_code == 200:
         repos = response.json()
         for repo in repos:
             repos_list.append(repo["full_name"])
             repos_dates.append(repo["updated_at"])
 
-        return repos_list, repos_dates
+            # Get the latest commit information
+            commits_url = repo["commits_url"].replace('{/sha}', '')  # Remove the placeholder
+            commits_response = requests.get(commits_url)
 
+            if commits_response.status_code == 200:
+                commits = commits_response.json()
+                # Count the number of commits (pushes)
+                pushes_count.append(len(commits))
 
-""" response =
-requests.get(f"https://api.github.com/users/willholyhasted/repos")
-if response.status_code == 200:
-        repos = response.json()
-        print( repos[0])
-        # data returned is a list of ‘repository’ entities
-       # for repo in repos:
-       #     print(repo["full_name"])
-else:
-    print(f"Error: {response.status_code}")
-"""
+                if commits:  # Check if there are any commits
+                    latest_commit = commits[0]  # Get the latest commit
+                    last_commits.append({
+                        "sha": latest_commit["sha"],
+                        "message": latest_commit["commit"]["message"]
+                    })
+                else:
+                    last_commits.append({"sha": None, "message": None})  # No commits found
+            else:
+                last_commits.append({"sha": None, "message": None})  # Handle commit fetch error
+                pushes_count.append(0)  # No pushes if commit fetch fails
+
+        return repos_list, repos_dates, last_commits, pushes_count  # Return repos, dates, last commits, and pushes count
+    else:
+        return None, None, None, None  # Handle error case
 
 
 @app.route("/")
@@ -45,8 +58,8 @@ def github_page():
 @app.route("/github/submit", methods=["POST"])
 def github_submit():
     input_name = request.form.get("username")
-    repositories, dates = make_request(input_name)
-    repo_data = zip(repositories, dates)  # Combine names and dates into pairs
+    repositories, dates, last_commits, pushes_count = make_request(input_name)
+    repo_data = zip(repositories, dates, last_commits, pushes_count)  # Combine names and dates into pairs
     return render_template("github_hello.html",
                            username=input_name, repo_data=repo_data)
 
